@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shining Star Building Materials Trading LLC | Sharjah</title>
+  <meta name="description" content="Building materials and hardware supplies in Sharjah Industrial Area 11. Browse products and contact us by phone or WhatsApp." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header" id="top">
+    <div class="container header__inner">
+      <a class="brand" href="#top">
+        <!-- Replace with logo later -->
+        <div class="brand__mark" aria-hidden="true">SS</div>
+        <div class="brand__text">
+          <div class="brand__name">Shining Star</div>
+          <div class="brand__sub">Building Materials Trading LLC</div>
+        </div>
+      </a>
+
+      <nav class="nav" aria-label="Main navigation">
+        <a href="#products">Products</a>
+        <a href="#about">About Us</a>
+        <a href="#contact">Contact Us</a>
+      </nav>
+
+      <button class="nav__menu" id="menuBtn" aria-label="Open menu">☰</button>
+    </div>
+
+    <!-- Mobile menu (only shows on small screens via CSS) -->
+    <div class="mobile-nav" id="mobileNav" hidden>
+      <a href="#products">Products</a>
+      <a href="#about">About Us</a>
+      <a href="#contact">Contact Us</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div class="hero__copy">
+        <h1>Building Materials & Hardware Supplies in Sharjah</h1>
+        <p>
+          Warehouse-based supplier in <strong>Industrial Area 11</strong>.
+          Browse our products by category and contact us directly.
+        </p>
+
+        <div class="hero__cta">
+          <a class="btn btn--primary" href="tel:+971524174000">Call</a>
+          <!-- WhatsApp can be upgraded to click-to-chat later -->
+          <a class="btn btn--outline" href="tel:+971524174000">WhatsApp</a>
+        </div>
+
+        <div class="hero__info">
+          <div><strong>Phone / WhatsApp:</strong> +971 52 417 4000</div>
+          <div><strong>Email:</strong> businessssmnt@gmail.com</div>
+          <div><strong>Location:</strong> Sharjah, Industrial Area 11</div>
+        </div>
+      </div>
+
+      <div class="hero__visual" aria-label="Hero image placeholder">
+        <div class="hero-image">
+          <div class="hero-image__text">
+            BIG HERO IMAGE PLACEHOLDER
+            <small>Add a warehouse/banner image later</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="products" class="section">
+    <div class="container">
+      <div class="section__head">
+        <h2>Products</h2>
+        <p>Select a category to view items. Click any item to view details.</p>
+      </div>
+
+      <div class="products-layout">
+        <!-- Category Filters -->
+        <aside class="categories" aria-label="Product categories">
+          <div class="categories__title">Categories</div>
+          <div class="categories__list" id="categoryList">
+            <!-- JS fills -->
+          </div>
+        </aside>
+
+        <!-- Items Grid -->
+        <div class="items">
+          <div class="items__head">
+            <h3 id="activeCategoryTitle">Wheelbarrows</h3>
+            <span class="items__count" id="itemsCount">0 items</span>
+          </div>
+
+          <div class="grid" id="itemsGrid">
+            <!-- JS fills -->
+          </div>
+
+          <div class="empty" id="emptyState" hidden>
+            <div class="empty__title">No items found in this category.</div>
+            <div class="empty__text">Add more products to the data later.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="section section--alt">
+    <div class="container">
+      <div class="section__head">
+        <h2>About Us</h2>
+        <p>Local supplier focused on quality materials and direct customer service.</p>
+      </div>
+
+      <div class="about">
+        <div class="about__card">
+          <h3>Shining Star Building Materials Trading LLC</h3>
+          <p>
+            We provide essential hardware and building materials for contractors,
+            workshops, maintenance teams, and retail buyers. Our website is designed
+            to help customers find product categories fast and contact us directly.
+          </p>
+        </div>
+
+        <div class="about__card about__card--img">
+          <div class="image-box">
+            ABOUT IMAGE PLACEHOLDER
+            <small>Add company/warehouse photo later</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="section section--cta">
+    <div class="container">
+      <div class="section__head">
+        <h2>Contact Us</h2>
+        <p>Call or WhatsApp for availability and inquiries.</p>
+      </div>
+
+      <div class="contact">
+        <div class="contact__card">
+          <h3>Direct Contact</h3>
+          <p><strong>Phone / WhatsApp:</strong> <a href="tel:+971524174000">+971 52 417 4000</a></p>
+          <p><strong>Email:</strong> <a href="mailto:businessssmnt@gmail.com">businessssmnt@gmail.com</a></p>
+          <p><strong>Address:</strong> Sharjah, Industrial Area 11 (Warehouse)</p>
+          <p><strong>Hours:</strong> Mon–Sun: 9:00 AM – 7:00 PM</p>
+
+          <div class="contact__cta">
+            <a class="btn btn--primary" href="tel:+971524174000">Call</a>
+            <a class="btn btn--outline" href="tel:+971524174000">WhatsApp</a>
+          </div>
+        </div>
+
+        <div class="contact__card">
+          <div class="image-box">
+            MAP PLACEHOLDER
+            <small>Add Google Maps embed later</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>
+        <div class="footer__brand">Shining Star Building Materials Trading LLC</div>
+        <div class="footer__muted">Sharjah — Industrial Area 11</div>
+      </div>
+      <div class="footer__links">
+        <a href="#products">Products</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Item Detail Modal -->
+  <div class="modal" id="itemModal" aria-hidden="true">
+    <div class="modal__backdrop" id="modalBackdrop"></div>
+
+    <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal__close" id="modalCloseBtn" aria-label="Close">✕</button>
+
+      <div class="modal__content">
+        <div class="modal__image" id="modalImage">
+          IMAGE PLACEHOLDER
+          <small>Add item photo later</small>
+        </div>
+
+        <div class="modal__info">
+          <h3 id="modalTitle">Item Name</h3>
+          <p id="modalDesc" class="modal__desc">Short description</p>
+
+          <div class="modal__meta">
+            <span class="pill" id="modalCategory">Category</span>
+          </div>
+
+          <div class="modal__actions">
+            <a class="btn btn--primary" href="tel:+971524174000">Call</a>
+            <a class="btn btn--outline" href="tel:+971524174000">WhatsApp</a>
+          </div>
+
+          <p class="hint">Images will be linked later to each item.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
