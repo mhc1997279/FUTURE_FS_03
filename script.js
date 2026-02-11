@@ -1,219 +1,204 @@
-// ====== DATA (your categories + items) ======
-const PHONE = "+971524174000";
+// ===== Config =====
+const PHONE_INTL = "971524174000"; // no + for WhatsApp
+const PHONE_DISPLAY = "+971 52 417 4000";
+const EMAIL = "businessssmnt@gmail.com";
+const ADDRESS = "Industrial Area 11, Sharjah, UAE";
 
-// Categories you asked for
-const CATEGORIES = [
-  { id: "wheelbarrows", label: "Wheelbarrows" },
-  { id: "printed_tapes", label: "Printed Tapes" },
-  { id: "trolleys", label: "Trolleys" },
-  { id: "chalk_powder", label: "Chalk Line Powder" },
-];
-
-// Items inside categories (placeholder images for now)
-const ITEMS = [
-  // Wheelbarrows (4)
+// Products (4 only)
+const PRODUCTS = [
   {
-    id: "wb_pink",
-    category: "wheelbarrows",
+    id: "pink",
     name: "Pink Wheelbarrow",
-    desc: "Durable wheelbarrow for site material handling.",
+    desc: "Heavy-duty pink wheelbarrow built for construction and gardening tasks.",
+    brand: "CHF Gold",
+    img: "" // add later: assets/products/pink.jpg
   },
   {
-    id: "wb_green_welding",
-    category: "wheelbarrows",
-    name: "Green Welding Wheelbarrow",
-    desc: "Strong frame, suitable for heavy-duty use.",
-  },
-  {
-    id: "wb_blue_welding",
-    category: "wheelbarrows",
-    name: "Blue Welding Wheelbarrow",
-    desc: "Welding model wheelbarrow (blue variant).",
-  },
-  {
-    id: "wb_blue_france",
-    category: "wheelbarrows",
+    id: "blue-france",
     name: "Blue Wheelbarrow (France Model)",
-    desc: "France model wheelbarrow (blue).",
-  },
-
-  // Printed tapes (your grouping)
-  {
-    id: "tape_caution",
-    category: "printed_tapes",
-    name: "Caution Tape",
-    desc: "Printed tape for site safety and marking.",
+    desc: "French-style blue wheelbarrow with reinforced tray and strong frame.",
+    brand: "CHF Gold",
+    img: "" // add later
   },
   {
-    id: "tape_warning",
-    category: "printed_tapes",
-    name: "Warning Tape",
-    desc: "High visibility printed warning tape.",
+    id: "green-welding",
+    name: "Green Welding Wheelbarrow",
+    desc: "Welded steel construction wheelbarrow for heavy material handling.",
+    brand: "CHF Gold",
+    img: "" // add later
   },
   {
-    id: "tape_red_white",
-    category: "printed_tapes",
-    name: "Red & White Printed Tape",
-    desc: "Printed red/white tape for clear hazard marking.",
-  },
-  {
-    id: "tape_mixed_warning",
-    category: "printed_tapes",
-    name: "Mixed Color Warning Tape",
-    desc: "Mixed color warning tape variant.",
-  },
-
-  // Trolleys
-  {
-    id: "trolley_tabook",
-    category: "trolleys",
-    name: "Tabook Trolley",
-    desc: "Trolley for moving materials efficiently.",
-  },
-  {
-    id: "trolley_gas",
-    category: "trolleys",
-    name: "Gas Trolley",
-    desc: "Trolley designed for gas cylinder handling.",
-  },
-  {
-    id: "trolley_folding",
-    category: "trolleys",
-    name: "Folding Trolley",
-    desc: "Compact folding trolley for easy storage.",
-  },
-
-  // Chalk line powder brands (as you said: CHF Board brand, Novice, Reflexes)
-  // I’m naming the category clearly; item names keep your words.
-  {
-    id: "chalk_chf",
-    category: "chalk_powder",
-    name: "CHF Board Brand",
-    desc: "Chalk line powder (brand variant).",
-  },
-  {
-    id: "chalk_novice",
-    category: "chalk_powder",
-    name: "Novice",
-    desc: "Chalk line powder (brand variant).",
-  },
-  {
-    id: "chalk_reflexes",
-    category: "chalk_powder",
-    name: "Reflexes",
-    desc: "Chalk line powder (brand variant).",
-  },
+    id: "tabuk-trolley",
+    name: "Big Wheel Tabuk Trolley",
+    desc: "Large-wheel trolley designed for rough terrain and bulk material transport.",
+    brand: "CHF Gold",
+    img: "" // add later
+  }
 ];
 
-// ====== STATE ======
-let activeCategory = "wheelbarrows";
+// ===== Helpers =====
+function telLink() {
+  return `tel:+${PHONE_INTL}`;
+}
 
-// ====== ELEMENTS ======
-const categoryList = document.getElementById("categoryList");
-const itemsGrid = document.getElementById("itemsGrid");
-const emptyState = document.getElementById("emptyState");
-const activeCategoryTitle = document.getElementById("activeCategoryTitle");
-const itemsCount = document.getElementById("itemsCount");
+function waLink(message) {
+  const text = encodeURIComponent(message);
+  return `https://wa.me/${PHONE_INTL}?text=${text}`;
+}
 
-// Modal
-const modal = document.getElementById("itemModal");
-const modalBackdrop = document.getElementById("modalBackdrop");
-const modalCloseBtn = document.getElementById("modalCloseBtn");
-const modalTitle = document.getElementById("modalTitle");
-const modalDesc = document.getElementById("modalDesc");
-const modalCategory = document.getElementById("modalCategory");
+function setHref(id, href) {
+  const el = document.getElementById(id);
+  if (el) el.href = href;
+}
 
-// Mobile nav
+function clampCardDesc(text) {
+  return text; // CSS clamps to 1 line; keep full text in modal
+}
+
+// ===== Header mobile nav =====
 const menuBtn = document.getElementById("menuBtn");
 const mobileNav = document.getElementById("mobileNav");
 
-// ====== HELPERS ======
-function categoryLabel(catId) {
-  return CATEGORIES.find(c => c.id === catId)?.label || "Category";
-}
+menuBtn?.addEventListener("click", () => {
+  const hidden = mobileNav.hasAttribute("hidden");
+  if (hidden) mobileNav.removeAttribute("hidden");
+  else mobileNav.setAttribute("hidden", "");
+});
 
-function filteredItems() {
-  return ITEMS.filter(i => i.category === activeCategory);
-}
+mobileNav?.addEventListener("click", (e) => {
+  if (e.target.tagName === "A") mobileNav.setAttribute("hidden", "");
+});
 
-// ====== RENDER ======
-function renderCategories() {
-  categoryList.innerHTML = "";
-  CATEGORIES.forEach(cat => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = `cat-btn ${cat.id === activeCategory ? "is-active" : ""}`;
-    btn.textContent = cat.label;
-    btn.addEventListener("click", () => {
-      activeCategory = cat.id;
-      renderCategories();
-      renderItems();
-    });
-    categoryList.appendChild(btn);
-  });
-}
+// ===== Set contact links =====
+document.getElementById("phoneText").textContent = PHONE_DISPLAY;
+document.getElementById("waText").textContent = PHONE_DISPLAY;
 
-function renderItems() {
-  const list = filteredItems();
-  activeCategoryTitle.textContent = categoryLabel(activeCategory);
-  itemsCount.textContent = `${list.length} item${list.length === 1 ? "" : "s"}`;
+setHref("heroCall", telLink());
+setHref("contactCall", telLink());
+setHref("modalCall", telLink());
 
-  itemsGrid.innerHTML = "";
-  emptyState.hidden = list.length !== 0;
+const defaultWaMsg = `Hello Shining Star. I would like to inquire about Wheelbarrows & Trolleys.`;
+setHref("heroWa", waLink(defaultWaMsg));
+setHref("contactWa", waLink(defaultWaMsg));
+setHref("modalWa", waLink(defaultWaMsg)); // updated when opening modal
 
-  list.forEach(item => {
+// ===== Render product grid =====
+const grid = document.getElementById("productGrid");
+
+function renderGrid() {
+  grid.innerHTML = "";
+  PRODUCTS.forEach((p) => {
     const card = document.createElement("div");
-    card.className = "item-card";
+    card.className = "pCard";
     card.tabIndex = 0;
 
+    const imgHtml = p.img
+      ? `<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;display:block;" />`
+      : `<div class="pImg">Image</div>`;
+
     card.innerHTML = `
-      <div class="item-card__img">IMAGE</div>
-      <div class="item-card__body">
-        <h4 class="item-card__title">${item.name}</h4>
-        <p class="item-card__desc">${item.desc}</p>
+      <div class="pImgWrap">${imgHtml}</div>
+      <div class="pBody">
+        <h3 class="pTitle">${p.name}</h3>
+        <p class="pDesc">${clampCardDesc(p.desc)}</p>
       </div>
     `;
 
-    card.addEventListener("click", () => openModal(item));
+    card.addEventListener("click", () => openModal(p));
     card.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") openModal(item);
+      if (e.key === "Enter" || e.key === " ") openModal(p);
     });
 
-    itemsGrid.appendChild(card);
+    grid.appendChild(card);
   });
 }
 
-// ====== MODAL ======
-function openModal(item) {
+renderGrid();
+
+// ===== Modal logic =====
+const modal = document.getElementById("productModal");
+const backdrop = document.getElementById("modalBackdrop");
+const closeBtn = document.getElementById("modalCloseBtn");
+
+const modalTitle = document.getElementById("modalTitle");
+const modalDesc = document.getElementById("modalDesc");
+const modalImage = document.getElementById("modalImage");
+const modalWa = document.getElementById("modalWa");
+
+const quoteBtn = document.getElementById("quoteBtn");
+
+let selectedProduct = null;
+
+function openModal(product) {
+  selectedProduct = product;
+
+  modalTitle.textContent = product.name;
+  modalDesc.textContent = product.desc;
+
+  // Image
+  if (product.img) {
+    modalImage.innerHTML = `<img src="${product.img}" alt="${product.name}" style="width:100%;height:100%;object-fit:cover;display:block;" />`;
+  } else {
+    modalImage.innerHTML = `<div class="imgPh">Image Placeholder</div>`;
+  }
+
+  // WhatsApp message for this product
+  const msg = `Hello Shining Star. I want a quote for: ${product.name} (Brand: CHF Gold).`;
+  modalWa.href = waLink(msg);
+
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
-  modalTitle.textContent = item.name;
-  modalDesc.textContent = item.desc;
-  modalCategory.textContent = categoryLabel(item.category);
   document.body.style.overflow = "hidden";
 }
+
 function closeModal() {
   modal.classList.remove("is-open");
   modal.setAttribute("aria-hidden", "true");
   document.body.style.overflow = "";
 }
 
-modalBackdrop.addEventListener("click", closeModal);
-modalCloseBtn.addEventListener("click", closeModal);
+backdrop?.addEventListener("click", closeModal);
+closeBtn?.addEventListener("click", closeModal);
+
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && modal.classList.contains("is-open")) closeModal();
 });
 
-// ====== MOBILE NAV (no duplicate on desktop; only appears on small screens) ======
-menuBtn.addEventListener("click", () => {
-  const isHidden = mobileNav.hasAttribute("hidden");
-  if (isHidden) mobileNav.removeAttribute("hidden");
-  else mobileNav.setAttribute("hidden", "");
-});
-mobileNav.addEventListener("click", (e) => {
-  if (e.target.tagName === "A") mobileNav.setAttribute("hidden", "");
+// ===== Get a Quote behavior (modal -> contact + prefill form) =====
+const form = document.getElementById("contactForm");
+const nameInput = document.getElementById("name");
+const emailInput = document.getElementById("email");
+const messageInput = document.getElementById("message");
+const hint = document.getElementById("prefillHint");
+
+quoteBtn?.addEventListener("click", () => {
+  if (!selectedProduct) return;
+
+  // Prefill message for contact form
+  const quoteText = `Quote request: ${selectedProduct.name} (CHF Gold). Please share availability and pricing.`;
+
+  messageInput.value = quoteText;
+  hint.hidden = false;
+
+  closeModal();
+  document.getElementById("contact").scrollIntoView({ behavior: "smooth" });
 });
 
-// ====== INIT ======
-renderCategories();
-renderItems();
+// ===== Send via WhatsApp (form) =====
+const sendWaBtn = document.getElementById("sendWaBtn");
+
+sendWaBtn?.addEventListener("click", () => {
+  const name = (nameInput.value || "").trim();
+  const email = (emailInput.value || "").trim();
+  const msg = (messageInput.value || "").trim();
+
+  const lines = [];
+  lines.push("Hello Shining Star,");
+  if (name) lines.push(`Name: ${name}`);
+  if (email) lines.push(`Email: ${email}`);
+  if (msg) lines.push(`Message: ${msg}`);
+  if (!msg) lines.push("Message: I would like to inquire about your products.");
+
+  const finalMsg = lines.join("\n");
+  window.open(waLink(finalMsg), "_blank");
+});

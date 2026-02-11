@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Shining Star Building Materials Trading LLC | Sharjah</title>
-  <meta name="description" content="Building materials and hardware supplies in Sharjah Industrial Area 11. Browse products and contact us by phone or WhatsApp." />
+  <meta name="description" content="Warehouse-based supplier in Sharjah Industrial Area 11. Wheelbarrows & trolleys. Contact via call or WhatsApp." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -12,14 +12,7 @@
   <!-- Header -->
   <header class="header" id="top">
     <div class="container header__inner">
-      <a class="brand" href="#top">
-        <!-- Replace with logo later -->
-        <div class="brand__mark" aria-hidden="true">SS</div>
-        <div class="brand__text">
-          <div class="brand__name">Shining Star</div>
-          <div class="brand__sub">Building Materials Trading LLC</div>
-        </div>
-      </a>
+      <a class="logo" href="#top">Shining Star</a>
 
       <nav class="nav" aria-label="Main navigation">
         <a href="#products">Products</a>
@@ -27,11 +20,10 @@
         <a href="#contact">Contact Us</a>
       </nav>
 
-      <button class="nav__menu" id="menuBtn" aria-label="Open menu">☰</button>
+      <button class="menuBtn" id="menuBtn" aria-label="Open menu">☰</button>
     </div>
 
-    <!-- Mobile menu (only shows on small screens via CSS) -->
-    <div class="mobile-nav" id="mobileNav" hidden>
+    <div class="mobileNav" id="mobileNav" hidden>
       <a href="#products">Products</a>
       <a href="#about">About Us</a>
       <a href="#contact">Contact Us</a>
@@ -40,141 +32,144 @@
 
   <!-- Hero -->
   <section class="hero">
+    <div class="hero__bg" aria-hidden="true"></div>
+
     <div class="container hero__inner">
-      <div class="hero__copy">
-        <h1>Building Materials & Hardware Supplies in Sharjah</h1>
-        <p>
-          Warehouse-based supplier in <strong>Industrial Area 11</strong>.
-          Browse our products by category and contact us directly.
-        </p>
+      <h1>Building Materials & Hardware<br/>Supplies in Sharjah</h1>
+      <p>Warehouse-based supplier in Industrial Area 11</p>
 
-        <div class="hero__cta">
-          <a class="btn btn--primary" href="tel:+971524174000">Call</a>
-          <!-- WhatsApp can be upgraded to click-to-chat later -->
-          <a class="btn btn--outline" href="tel:+971524174000">WhatsApp</a>
-        </div>
-
-        <div class="hero__info">
-          <div><strong>Phone / WhatsApp:</strong> +971 52 417 4000</div>
-          <div><strong>Email:</strong> businessssmnt@gmail.com</div>
-          <div><strong>Location:</strong> Sharjah, Industrial Area 11</div>
-        </div>
-      </div>
-
-      <div class="hero__visual" aria-label="Hero image placeholder">
-        <div class="hero-image">
-          <div class="hero-image__text">
-            BIG HERO IMAGE PLACEHOLDER
-            <small>Add a warehouse/banner image later</small>
-          </div>
-        </div>
+      <div class="hero__actions">
+        <a class="btn btn--primary" id="heroCall" href="#">Call Us</a>
+        <a class="btn btn--ghost" id="heroWa" href="#">WhatsApp</a>
       </div>
     </div>
   </section>
 
   <!-- Products -->
-  <section id="products" class="section">
+  <section class="section" id="products">
     <div class="container">
-      <div class="section__head">
+      <div class="section__title">
         <h2>Products</h2>
-        <p>Select a category to view items. Click any item to view details.</p>
+        <span>Wheelbarrows &amp; Trolleys</span>
       </div>
 
-      <div class="products-layout">
-        <!-- Category Filters -->
-        <aside class="categories" aria-label="Product categories">
-          <div class="categories__title">Categories</div>
-          <div class="categories__list" id="categoryList">
-            <!-- JS fills -->
-          </div>
-        </aside>
-
-        <!-- Items Grid -->
-        <div class="items">
-          <div class="items__head">
-            <h3 id="activeCategoryTitle">Wheelbarrows</h3>
-            <span class="items__count" id="itemsCount">0 items</span>
-          </div>
-
-          <div class="grid" id="itemsGrid">
-            <!-- JS fills -->
-          </div>
-
-          <div class="empty" id="emptyState" hidden>
-            <div class="empty__title">No items found in this category.</div>
-            <div class="empty__text">Add more products to the data later.</div>
-          </div>
-        </div>
+      <div class="grid" id="productGrid">
+        <!-- JS inserts 4 cards -->
       </div>
     </div>
   </section>
 
   <!-- About -->
-  <section id="about" class="section section--alt">
-    <div class="container">
-      <div class="section__head">
+  <section class="section section--alt" id="about">
+    <div class="container narrow">
+      <div class="section__title center">
         <h2>About Us</h2>
-        <p>Local supplier focused on quality materials and direct customer service.</p>
       </div>
 
-      <div class="about">
-        <div class="about__card">
-          <h3>Shining Star Building Materials Trading LLC</h3>
-          <p>
-            We provide essential hardware and building materials for contractors,
-            workshops, maintenance teams, and retail buyers. Our website is designed
-            to help customers find product categories fast and contact us directly.
-          </p>
-        </div>
-
-        <div class="about__card about__card--img">
-          <div class="image-box">
-            ABOUT IMAGE PLACEHOLDER
-            <small>Add company/warehouse photo later</small>
-          </div>
-        </div>
-      </div>
+      <p class="aboutText">
+        Shining Star Building Materials Trading LLC is a trusted, warehouse-based supplier
+        located in Sharjah's Industrial Area 11. We provide a wide range of hardware and
+        building materials to contractors, builders, and businesses across the UAE.
+      </p>
+      <p class="aboutText">
+        Our focus is on delivering quality products at competitive rates with fast, reliable
+        service. Whether you need wheelbarrows, trolleys, or other construction essentials —
+        we're here to help.
+      </p>
     </div>
   </section>
 
   <!-- Contact -->
-  <section id="contact" class="section section--cta">
+  <section class="section" id="contact">
     <div class="container">
-      <div class="section__head">
+      <div class="section__title center">
         <h2>Contact Us</h2>
-        <p>Call or WhatsApp for availability and inquiries.</p>
       </div>
 
-      <div class="contact">
-        <div class="contact__card">
-          <h3>Direct Contact</h3>
-          <p><strong>Phone / WhatsApp:</strong> <a href="tel:+971524174000">+971 52 417 4000</a></p>
-          <p><strong>Email:</strong> <a href="mailto:businessssmnt@gmail.com">businessssmnt@gmail.com</a></p>
-          <p><strong>Address:</strong> Sharjah, Industrial Area 11 (Warehouse)</p>
-          <p><strong>Hours:</strong> Mon–Sun: 9:00 AM – 7:00 PM</p>
+      <div class="contactGrid">
+        <!-- Left info -->
+        <div class="card">
+          <div class="infoRow">
+            <div class="icon">📞</div>
+            <div>
+              <div class="label">Phone</div>
+              <div class="value" id="phoneText">+971 52 417 4000</div>
+            </div>
+          </div>
 
-          <div class="contact__cta">
-            <a class="btn btn--primary" href="tel:+971524174000">Call</a>
-            <a class="btn btn--outline" href="tel:+971524174000">WhatsApp</a>
+          <div class="infoRow">
+            <div class="icon">💬</div>
+            <div>
+              <div class="label">WhatsApp</div>
+              <div class="value" id="waText">+971 52 417 4000</div>
+            </div>
+          </div>
+
+          <div class="infoRow">
+            <div class="icon">✉️</div>
+            <div>
+              <div class="label">Email</div>
+              <div class="value">businessssmnt@gmail.com</div>
+            </div>
+          </div>
+
+          <div class="infoRow">
+            <div class="icon">📍</div>
+            <div>
+              <div class="label">Address</div>
+              <div class="value">Industrial Area 11, Sharjah, UAE</div>
+            </div>
+          </div>
+
+          <div class="contactActions">
+            <a class="btn btn--primary" id="contactCall" href="#">Call</a>
+            <a class="btn btn--ghost" id="contactWa" href="#">WhatsApp</a>
+          </div>
+
+          <div class="mapPlaceholder">
+            Google Maps Placeholder
           </div>
         </div>
 
-        <div class="contact__card">
-          <div class="image-box">
-            MAP PLACEHOLDER
-            <small>Add Google Maps embed later</small>
-          </div>
+        <!-- Right form -->
+        <div class="card">
+          <form id="contactForm" class="form">
+            <div class="field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" />
+            </div>
+
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="your@email.com" />
+            </div>
+
+            <div class="field">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5" placeholder="How can we help?"></textarea>
+            </div>
+
+            <button type="button" class="btn btn--primary btn--full" id="sendWaBtn">
+              Send via WhatsApp
+            </button>
+
+            <div class="hint" id="prefillHint" hidden>
+              Prefilled from product selection.
+            </div>
+          </form>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="container footer__inner">
-      <div>
+      <div class="footer__left">
         <div class="footer__brand">Shining Star Building Materials Trading LLC</div>
-        <div class="footer__muted">Sharjah — Industrial Area 11</div>
+        <div class="footer__muted">Industrial Area 11, Sharjah, UAE</div>
       </div>
+
       <div class="footer__links">
         <a href="#products">Products</a>
         <a href="#about">About</a>
@@ -183,33 +178,28 @@
     </div>
   </footer>
 
-  <!-- Item Detail Modal -->
-  <div class="modal" id="itemModal" aria-hidden="true">
+  <!-- Product Modal -->
+  <div class="modal" id="productModal" aria-hidden="true">
     <div class="modal__backdrop" id="modalBackdrop"></div>
 
     <div class="modal__panel" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <button class="modal__close" id="modalCloseBtn" aria-label="Close">✕</button>
+      <button class="modal__close" id="modalCloseBtn" aria-label="Close">×</button>
 
       <div class="modal__content">
         <div class="modal__image" id="modalImage">
-          IMAGE PLACEHOLDER
-          <small>Add item photo later</small>
+          <div class="imgPh">Image Placeholder</div>
         </div>
 
-        <div class="modal__info">
-          <h3 id="modalTitle">Item Name</h3>
-          <p id="modalDesc" class="modal__desc">Short description</p>
-
-          <div class="modal__meta">
-            <span class="pill" id="modalCategory">Category</span>
-          </div>
+        <div class="modal__body">
+          <h3 id="modalTitle">Product</h3>
+          <p id="modalDesc">Description</p>
+          <p class="meta"><strong>Brand:</strong> CHF Gold</p>
 
           <div class="modal__actions">
-            <a class="btn btn--primary" href="tel:+971524174000">Call</a>
-            <a class="btn btn--outline" href="tel:+971524174000">WhatsApp</a>
+            <button class="btn btn--primary" type="button" id="quoteBtn">Get a Quote</button>
+            <a class="btn btn--ghost" id="modalCall" href="#">Call</a>
+            <a class="btn btn--ghost" id="modalWa" href="#">WhatsApp</a>
           </div>
-
-          <p class="hint">Images will be linked later to each item.</p>
         </div>
       </div>
     </div>
