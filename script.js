@@ -11,28 +11,28 @@ const PRODUCTS = [
     name: "Pink Wheelbarrow",
     desc: "Heavy-duty pink wheelbarrow built for construction and gardening tasks.",
     brand: "CHF Gold",
-    img: "" // add later: assets/products/pink.jpg
+    img: "assets/products/pink.png" // add later: assets/products/pink.jpg
   },
   {
     id: "blue-france",
     name: "Blue Wheelbarrow (France Model)",
     desc: "French-style blue wheelbarrow with reinforced tray and strong frame.",
     brand: "CHF Gold",
-    img: "" // add later
+    img: "assets/products/blue-france.png" // add later
   },
   {
     id: "green-welding",
     name: "Green Welding Wheelbarrow",
     desc: "Welded steel construction wheelbarrow for heavy material handling.",
     brand: "CHF Gold",
-    img: "" // add later
+    img: "assets/products/green-welding.png" // add later
   },
   {
     id: "tabuk-trolley",
     name: "Big Wheel Tabuk Trolley",
     desc: "Large-wheel trolley designed for rough terrain and bulk material transport.",
     brand: "CHF Gold",
-    img: "" // add later
+    img: "assets/products/tabuk-trolley.png" // add later
   }
 ];
 
