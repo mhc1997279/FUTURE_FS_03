@@ -3,8 +3,6 @@ import { useSearchParams } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { BUSINESS_INFO } from "../config/business";
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
-
 export default function Contact() {
   const [searchParams] = useSearchParams();
   const productParam = searchParams.get("product") || "";
@@ -32,7 +30,7 @@ export default function Contact() {
     setStatus("submitting");
 
     try {
-      const res = await fetch(`${API_BASE}/api/contact`, {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
