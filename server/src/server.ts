@@ -12,17 +12,13 @@ if (process.env.NODE_ENV !== "production") {
 const PORT = Number(process.env.PORT) || 5000;
 
 // CORS allowlist
-const envOrigins = (process.env.ALLOWED_ORIGINS || "")
-  .split(",")
-  .map((o) => o.trim())
-  .filter(Boolean);
-const defaultOrigins = process.env.NODE_ENV === "production" ? [] : ["http://localhost:5173"];
-const allowedOrigins = Array.from(new Set([...defaultOrigins, ...envOrigins]));
+const prodOrigin = "https://shining-star-website-mocha.vercel.app";
+const allowedOrigins = [prodOrigin];
 
 const isAllowedOrigin = (origin: string): boolean => {
   try {
     const hostname = new URL(origin).hostname;
-    if (hostname.endsWith(".vercel.app")) return true;
+    if (hostname.endsWith(".vercel.app")) return true; // allow any Vercel preview
   } catch (_err) {
     // If URL parsing fails, fall through to explicit allowlist check
   }
