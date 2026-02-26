@@ -12,17 +12,27 @@ if (process.env.NODE_ENV !== "production") {
 const PORT = Number(process.env.PORT) || 5000;
 
 // CORS allowlist
-const envOrigins = (process.env.ALLOWED_ORIGINS || process.env.CORS_ORIGIN || "")
+const envOrigins = (process.env.ALLOWED_ORIGINS || "")
   .split(",")
   .map((o) => o.trim())
   .filter(Boolean);
 const defaultOrigins = process.env.NODE_ENV === "production" ? [] : ["http://localhost:5173"];
 const allowedOrigins = Array.from(new Set([...defaultOrigins, ...envOrigins]));
 
+const isAllowedOrigin = (origin: string): boolean => {
+  try {
+    const hostname = new URL(origin).hostname;
+    if (hostname.endsWith(".vercel.app")) return true;
+  } catch (_err) {
+    // If URL parsing fails, fall through to explicit allowlist check
+  }
+  return allowedOrigins.includes(origin);
+};
+
 const corsOptions: Parameters<typeof cors>[0] = {
   origin: (requestOrigin, callback) => {
     if (!requestOrigin) return callback(null, true); // allow non-browser tools
-    if (allowedOrigins.includes(requestOrigin)) return callback(null, true);
+    if (isAllowedOrigin(requestOrigin)) return callback(null, true);
     return callback(new Error("Not allowed by CORS"));
   },
   methods: ["GET", "POST"],
