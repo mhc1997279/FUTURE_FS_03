@@ -2,7 +2,6 @@ import express, { NextFunction, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import nodemailer from "nodemailer";
-import rateLimit from "express-rate-limit";
 import { z } from "zod";
 
 if (process.env.NODE_ENV !== "production") {
@@ -80,16 +79,6 @@ app.options("*", cors(corsOptions));
 
 app.use(express.json());
 
-const contactLimiter = rateLimit({
-  windowMs: 10 * 60 * 1000,
-  max: 5,
-  standardHeaders: true,
-  legacyHeaders: false,
-  handler: (_req, res) => {
-    res.status(429).json({ ok: false, message: "Too many requests. Please try again later." });
-  },
-});
-
 app.get("/api/health", (_req, res) => {
   res.json({ ok: true });
 });
@@ -98,7 +87,7 @@ app.get("/health", (_req, res) => {
   res.json({ ok: true });
 });
 
-app.post("/api/contact", contactLimiter, async (req: Request, res: Response, next: NextFunction) => {
+app.post("/api/contact", async (req: Request, res: Response) => {
   const parsed = contactSchema.safeParse(req.body);
 
   if (!parsed.success) {
@@ -129,7 +118,8 @@ app.post("/api/contact", contactLimiter, async (req: Request, res: Response, nex
     await transporter.sendMail(mailOptions);
     return res.status(200).json({ ok: true });
   } catch (error) {
-    return next(error);
+    console.error("Error sending mail:", error);
+    return res.status(500).json({ ok: false, message: "Server error. Please try again later." });
   }
 });
 
