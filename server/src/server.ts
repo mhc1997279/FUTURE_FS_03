@@ -12,12 +12,23 @@ if (process.env.NODE_ENV !== "production") {
 const PORT = Number(process.env.PORT) || 5000;
 
 // CORS allowlist
-const envOrigins = (process.env.CORS_ORIGIN || "")
+const envOrigins = (process.env.ALLOWED_ORIGINS || process.env.CORS_ORIGIN || "")
   .split(",")
   .map((o) => o.trim())
   .filter(Boolean);
 const defaultOrigins = process.env.NODE_ENV === "production" ? [] : ["http://localhost:5173"];
 const allowedOrigins = Array.from(new Set([...defaultOrigins, ...envOrigins]));
+
+const corsOptions: Parameters<typeof cors>[0] = {
+  origin: (requestOrigin, callback) => {
+    if (!requestOrigin) return callback(null, true); // allow non-browser tools
+    if (allowedOrigins.includes(requestOrigin)) return callback(null, true);
+    return callback(new Error("Not allowed by CORS"));
+  },
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"],
+  optionsSuccessStatus: 204,
+};
 
 // SMTP configuration (warn but do not crash if missing)
 const SMTP_USER = process.env.SMTP_USER || process.env.MAIL_USER || process.env.GMAIL_USER;
@@ -58,26 +69,8 @@ const contactSchema = z.object({
 
 const app = express();
 
-// CORS guard with JSON error for disallowed origins
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-  if (origin && !allowedOrigins.includes(origin)) {
-    return res.status(403).json({ ok: false, message: "Origin not allowed" });
-  }
-  return next();
-});
-
-app.use(
-  cors({
-    origin: (requestOrigin, callback) => {
-      if (!requestOrigin) return callback(null, true);
-      if (allowedOrigins.includes(requestOrigin)) return callback(null, true);
-      return callback(new Error("Not allowed by CORS"));
-    },
-    methods: ["GET", "POST"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use(express.json());
 
