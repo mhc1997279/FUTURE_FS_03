@@ -37,8 +37,8 @@ const corsOptions: Parameters<typeof cors>[0] = {
 };
 
 // SMTP configuration (warn but do not crash if missing)
-const SMTP_USER = process.env.SMTP_USER || process.env.MAIL_USER || process.env.GMAIL_USER;
-const SMTP_PASS = process.env.SMTP_PASS || process.env.MAIL_PASS || process.env.GMAIL_APP_PASSWORD;
+const SMTP_USER = process.env.SMTP_USER;
+const SMTP_PASS = process.env.SMTP_PASS;
 const SMTP_TO = process.env.SMTP_TO || process.env.MAIL_TO || SMTP_USER;
 const SMTP_FROM = process.env.MAIL_FROM || SMTP_USER;
 
