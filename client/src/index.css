@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --primary: #1A1A73;
+    --primary-dark: #0D0DD9;
+    --accent: #E07A2F;
+    --accent-light: #FDF0E4;
+    --bg: #F7F9FB;
+    --surface: #FFFFFF;
+    --text: #233044;
+    --muted: #E8ECF0;
+    --header: #FFFFFF;
+    --border: #E5E7EB;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', 'Inter', sans-serif;
+    font-weight: 600;
+    color: var(--text);
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply container mx-auto px-4 md:px-6 lg:px-8;
+  }
+
+  .btn-primary {
+    @apply px-6 py-3 rounded-md font-semibold transition-all shadow-md flex items-center gap-2;
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 10px 25px rgba(224, 122, 47, 0.18);
+    @apply hover:shadow-lg;
+  }
+
+  .btn-primary:hover {
+    background: #d26c24;
+  }
+
+  .btn-outline {
+    @apply border-2 px-6 py-3 rounded-md font-semibold transition-all flex items-center gap-2;
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  .btn-outline:hover {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  .btn-outline-light {
+    @apply border-2 border-white/60 text-white px-6 py-3 rounded-md font-semibold
+           transition-all hover:border-white hover:bg-white/10 flex items-center gap-2;
+  }
+
+  .chip {
+    @apply text-[11px] font-bold uppercase tracking-wider;
+    color: var(--accent);
+  }
+}
